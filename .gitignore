@@ -6,6 +6,9 @@ dist-ssr/
 .env.local
 *.local
 
+# TypeScript build cache
+*.tsbuildinfo
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

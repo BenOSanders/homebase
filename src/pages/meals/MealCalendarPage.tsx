@@ -13,7 +13,6 @@ import { ChevronLeft, ChevronRight, Plus, X, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import {
   Dialog,
@@ -62,7 +61,7 @@ export function MealCalendarPage() {
         .gte('date', weekStartStr)
         .lte('date', weekEndStr)
       if (error) throw error
-      return (data ?? []) as (MealPlan & { recipe: Recipe | null })[]
+      return (data ?? []) as unknown as (MealPlan & { recipe: Recipe | null })[]
     },
     enabled: !!householdId,
   })

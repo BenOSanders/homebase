@@ -22,7 +22,7 @@ import { ConfirmDialog } from '@/components/shared/ConfirmDialog'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { toast } from '@/hooks/use-toast'
-import { formatDate, cn } from '@/lib/utils'
+import { formatDate } from '@/lib/utils'
 import { MAINTENANCE_CATEGORIES } from '@/types'
 import type { MaintenanceItem } from '@/types'
 

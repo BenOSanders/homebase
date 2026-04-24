@@ -16,7 +16,7 @@ import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { isAfter, parseISO, startOfMonth, endOfMonth } from 'date-fns'
-import type { Chore, MaintenanceItem, BudgetTransaction, MealPlan } from '@/types'
+import type { Chore, MaintenanceItem } from '@/types'
 
 function StatCard({
   title,

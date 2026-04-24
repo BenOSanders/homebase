@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { toast } from '@/hooks/use-toast'
+import type { Json } from '@/types/database'
 import type { Recipe, RecipeIngredient, RecipeInstruction } from '@/types'
 
 export function RecipeFormPage() {
@@ -62,8 +63,8 @@ export function RecipeFormPage() {
         prep_time_mins: prepTime ? parseInt(prepTime) : null,
         cook_time_mins: cookTime ? parseInt(cookTime) : null,
         tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
-        ingredients: ingredients.filter((i) => i.name.trim()),
-        instructions: instructions.filter((i) => i.text.trim()).map((i, idx) => ({ ...i, step: idx + 1 })),
+        ingredients: ingredients.filter((i) => i.name.trim()) as unknown as Json,
+        instructions: instructions.filter((i) => i.text.trim()).map((i, idx) => ({ ...i, step: idx + 1 })) as unknown as Json,
         created_by: profile?.id,
       }
       if (isEdit && id) {

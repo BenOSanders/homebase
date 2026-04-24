@@ -22,6 +22,7 @@ export interface Database {
           invite_code?: string
           created_at?: string
         }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -48,6 +49,22 @@ export interface Database {
           avatar_url?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'profiles_id_fkey'
+            columns: ['id']
+            isOneToOne: true
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'profiles_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          }
+        ]
       }
       chores: {
         Row: {
@@ -86,6 +103,29 @@ export interface Database {
           created_by?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'chores_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'chores_assigned_to_fkey'
+            columns: ['assigned_to']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'chores_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
       }
       maintenance_items: {
         Row: {
@@ -127,6 +167,22 @@ export interface Database {
           created_by?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'maintenance_items_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'maintenance_items_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
       }
       budget_accounts: {
         Row: {
@@ -162,6 +218,15 @@ export interface Database {
           last_synced_at?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'budget_accounts_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          }
+        ]
       }
       budget_transactions: {
         Row: {
@@ -200,6 +265,22 @@ export interface Database {
           plaid_transaction_id?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'budget_transactions_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'budget_transactions_account_id_fkey'
+            columns: ['account_id']
+            isOneToOne: false
+            referencedRelation: 'budget_accounts'
+            referencedColumns: ['id']
+          }
+        ]
       }
       budget_categories: {
         Row: {
@@ -226,6 +307,15 @@ export interface Database {
           color?: string
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'budget_categories_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          }
+        ]
       }
       recipes: {
         Row: {
@@ -273,6 +363,22 @@ export interface Database {
           created_by?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'recipes_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'recipes_created_by_fkey'
+            columns: ['created_by']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
       }
       meal_plan: {
         Row: {
@@ -305,6 +411,22 @@ export interface Database {
           notes?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'meal_plan_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'meal_plan_recipe_id_fkey'
+            columns: ['recipe_id']
+            isOneToOne: false
+            referencedRelation: 'recipes'
+            referencedColumns: ['id']
+          }
+        ]
       }
     }
     Views: Record<string, never>
