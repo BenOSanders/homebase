@@ -115,7 +115,7 @@ export function RecipesPage() {
         ingredients: Array.isArray(r.ingredients) ? r.ingredients : [],
         instructions: Array.isArray(r.instructions) ? r.instructions : [],
         tags: Array.isArray(r.tags) ? r.tags : [],
-      })) as Recipe[]
+      })) as unknown as Recipe[]
     },
     enabled: !!householdId,
   })

@@ -28,7 +28,7 @@ export function RecipeDetailPage() {
         ingredients: Array.isArray(data.ingredients) ? data.ingredients : [],
         instructions: Array.isArray(data.instructions) ? data.instructions : [],
         tags: Array.isArray(data.tags) ? data.tags : [],
-      } as Recipe
+      } as unknown as Recipe
     },
     enabled: !!id,
   })
