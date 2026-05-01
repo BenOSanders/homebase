@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Copy, Check, UserMinus, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -25,6 +25,10 @@ export function HouseholdSettingsPage() {
   const [copied, setCopied] = useState(false)
   const [householdName, setHouseholdName] = useState(household?.name ?? '')
   const [removeTarget, setRemoveTarget] = useState<Profile | null>(null)
+
+  useEffect(() => {
+    if (household?.name) setHouseholdName(household.name)
+  }, [household?.name])
 
   const isOwner = profile?.role === 'owner'
 
@@ -77,7 +81,7 @@ export function HouseholdSettingsPage() {
             <Label>Household name</Label>
             <div className="flex gap-2">
               <Input
-                value={householdName || household?.name || ''}
+                value={householdName}
                 onChange={(e) => setHouseholdName(e.target.value)}
                 disabled={!isOwner}
               />

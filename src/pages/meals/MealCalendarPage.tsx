@@ -222,10 +222,10 @@ export function MealCalendarPage() {
           <div className="grid gap-4 py-2">
             <div className="grid gap-2">
               <Label>From your recipes</Label>
-              <Select value={selectedRecipe} onValueChange={setSelectedRecipe}>
+              <Select value={selectedRecipe || '__none__'} onValueChange={(v) => setSelectedRecipe(v === '__none__' ? '' : v)}>
                 <SelectTrigger><SelectValue placeholder="Choose a recipe…" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">None</SelectItem>
+                  <SelectItem value="__none__">None</SelectItem>
                   {recipes.map((r) => (
                     <SelectItem key={r.id} value={r.id}>{r.title}</SelectItem>
                   ))}

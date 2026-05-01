@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Camera } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,11 +13,15 @@ import { toast } from '@/hooks/use-toast'
 import { getInitials } from '@/lib/utils'
 
 export function ProfileSettingsPage() {
-  const { profile, user, signOut } = useAuth()
+  const { profile, user, signOut, refreshProfile } = useAuth()
   const queryClient = useQueryClient()
 
   const [displayName, setDisplayName] = useState(profile?.display_name ?? '')
   const [uploading, setUploading] = useState(false)
+
+  useEffect(() => {
+    if (profile?.display_name) setDisplayName(profile.display_name)
+  }, [profile?.display_name])
 
   const updateMutation = useMutation({
     mutationFn: async () => {
@@ -31,7 +35,7 @@ export function ProfileSettingsPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] })
       toast({ title: 'Profile updated' })
-      window.location.reload()
+      refreshProfile()
     },
     onError: (e: Error) => toast({ title: 'Error', description: e.message, variant: 'destructive' }),
   })
@@ -52,7 +56,7 @@ export function ProfileSettingsPage() {
     await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', profile.id)
     toast({ title: 'Avatar updated' })
     setUploading(false)
-    window.location.reload()
+    refreshProfile()
   }
 
   return (

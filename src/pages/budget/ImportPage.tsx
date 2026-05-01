@@ -192,10 +192,10 @@ export function ImportPage() {
             ))}
             <div className="grid grid-cols-2 items-center gap-4">
               <Label>Category (optional)</Label>
-              <Select value={mapping.category} onValueChange={(v) => setMapping((m) => ({ ...m, category: v }))}>
+              <Select value={mapping.category || '__none__'} onValueChange={(v) => setMapping((m) => ({ ...m, category: v === '__none__' ? '' : v }))}>
                 <SelectTrigger><SelectValue placeholder="None" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">None</SelectItem>
+                  <SelectItem value="__none__">None</SelectItem>
                   {headers.map((h) => <SelectItem key={h} value={h}>{h}</SelectItem>)}
                 </SelectContent>
               </Select>
@@ -203,10 +203,10 @@ export function ImportPage() {
             {accounts.length > 0 && (
               <div className="grid grid-cols-2 items-center gap-4">
                 <Label>Account (optional)</Label>
-                <Select value={accountId} onValueChange={setAccountId}>
+                <Select value={accountId || '__none__'} onValueChange={(v) => setAccountId(v === '__none__' ? '' : v)}>
                   <SelectTrigger><SelectValue placeholder="No account" /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">No account</SelectItem>
+                    <SelectItem value="__none__">No account</SelectItem>
                     {accounts.map((a) => <SelectItem key={a.id} value={a.id}>{a.name}</SelectItem>)}
                   </SelectContent>
                 </Select>
