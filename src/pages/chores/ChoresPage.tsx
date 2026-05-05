@@ -255,12 +255,12 @@ export function ChoresPage() {
                 <div className="grid gap-2">
                   <Label>Assign to</Label>
                   <Select
-                    value={form.assigned_to}
-                    onValueChange={(v) => setForm((f) => ({ ...f, assigned_to: v }))}
+                    value={form.assigned_to || '__none__'}
+                    onValueChange={(v) => setForm((f) => ({ ...f, assigned_to: v === '__none__' ? '' : v }))}
                   >
                     <SelectTrigger><SelectValue placeholder="Anyone" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Anyone</SelectItem>
+                      <SelectItem value="__none__">Anyone</SelectItem>
                       {members.map((m) => (
                         <SelectItem key={m.id} value={m.id}>{m.display_name}</SelectItem>
                       ))}

@@ -245,10 +245,10 @@ export function BudgetPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="grid gap-2">
                     <Label>Category</Label>
-                    <Select value={txForm.category} onValueChange={(v) => setTxForm((f) => ({ ...f, category: v }))}>
+                    <Select value={txForm.category || '__none__'} onValueChange={(v) => setTxForm((f) => ({ ...f, category: v === '__none__' ? '' : v }))}>
                       <SelectTrigger><SelectValue placeholder="Select…" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Uncategorized</SelectItem>
+                        <SelectItem value="__none__">Uncategorized</SelectItem>
                         {(categories as { id: string; name: string }[]).map((c) => (
                           <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
                         ))}
@@ -263,10 +263,10 @@ export function BudgetPage() {
                 {accounts.length > 0 && (
                   <div className="grid gap-2">
                     <Label>Account</Label>
-                    <Select value={txForm.account_id} onValueChange={(v) => setTxForm((f) => ({ ...f, account_id: v }))}>
+                    <Select value={txForm.account_id || '__none__'} onValueChange={(v) => setTxForm((f) => ({ ...f, account_id: v === '__none__' ? '' : v }))}>
                       <SelectTrigger><SelectValue placeholder="No account" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">No account</SelectItem>
+                        <SelectItem value="__none__">No account</SelectItem>
                         {accounts.map((a) => (
                           <SelectItem key={a.id} value={a.id}>{a.name}</SelectItem>
                         ))}
