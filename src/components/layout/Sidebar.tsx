@@ -6,6 +6,7 @@ import {
   DollarSign,
   CalendarDays,
   BookOpen,
+  ShoppingCart,
   Settings,
   Home,
   ChevronLeft,
@@ -23,6 +24,7 @@ const navItems = [
   { to: '/budget', icon: DollarSign, label: 'Budget' },
   { to: '/meals', icon: CalendarDays, label: 'Meal Calendar' },
   { to: '/recipes', icon: BookOpen, label: 'Recipes' },
+  { to: '/shopping', icon: ShoppingCart, label: 'Shopping List' },
 ]
 
 export function Sidebar() {

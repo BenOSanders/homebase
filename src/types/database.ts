@@ -428,6 +428,54 @@ export interface Database {
           }
         ]
       }
+      shopping_list_items: {
+        Row: {
+          id: string
+          household_id: string
+          name: string
+          quantity: string | null
+          category: string | null
+          checked: boolean
+          added_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          household_id: string
+          name: string
+          quantity?: string | null
+          category?: string | null
+          checked?: boolean
+          added_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          household_id?: string
+          name?: string
+          quantity?: string | null
+          category?: string | null
+          checked?: boolean
+          added_by?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'shopping_list_items_household_id_fkey'
+            columns: ['household_id']
+            isOneToOne: false
+            referencedRelation: 'households'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'shopping_list_items_added_by_fkey'
+            columns: ['added_by']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>

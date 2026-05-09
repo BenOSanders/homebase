@@ -14,6 +14,7 @@ import { MealCalendarPage } from '@/pages/meals/MealCalendarPage'
 import { RecipesPage } from '@/pages/recipes/RecipesPage'
 import { RecipeFormPage } from '@/pages/recipes/RecipeFormPage'
 import { RecipeDetailPage } from '@/pages/recipes/RecipeDetailPage'
+import { ShoppingListPage } from '@/pages/shopping/ShoppingListPage'
 import { SettingsPage } from '@/pages/settings/SettingsPage'
 import { ProfileSettingsPage } from '@/pages/settings/ProfileSettingsPage'
 import { HouseholdSettingsPage } from '@/pages/settings/HouseholdSettingsPage'
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/budget" element={<BudgetPage />} />
             <Route path="/budget/import" element={<ImportPage />} />
             <Route path="/meals" element={<MealCalendarPage />} />
+            <Route path="/shopping" element={<ShoppingListPage />} />
             <Route path="/recipes" element={<RecipesPage />} />
             <Route path="/recipes/new" element={<RecipeFormPage />} />
             <Route path="/recipes/:id" element={<RecipeDetailPage />} />
