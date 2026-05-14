@@ -118,6 +118,31 @@ export interface MealPlan {
   recipe?: Recipe
 }
 
+export interface ShoppingListItem {
+  id: string
+  household_id: string
+  name: string
+  quantity: string | null
+  category: string | null
+  checked: boolean
+  added_by: string | null
+  created_at: string
+}
+
+export const SHOPPING_CATEGORIES = [
+  'Produce',
+  'Dairy & Eggs',
+  'Meat & Seafood',
+  'Bakery',
+  'Pantry',
+  'Frozen',
+  'Beverages',
+  'Snacks',
+  'Household',
+  'Personal Care',
+  'Other',
+] as const
+
 export const MAINTENANCE_CATEGORIES = [
   'HVAC',
   'Plumbing',

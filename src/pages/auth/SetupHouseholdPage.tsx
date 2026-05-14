@@ -44,6 +44,7 @@ export function SetupHouseholdPage() {
       role: 'owner',
     })
 
+    setLoading(false)
     navigate('/dashboard')
   }
 
@@ -74,6 +75,7 @@ export function SetupHouseholdPage() {
       role: 'member',
     })
 
+    setLoading(false)
     navigate('/dashboard')
   }
 

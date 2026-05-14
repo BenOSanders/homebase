@@ -37,6 +37,7 @@ import { toast } from '@/hooks/use-toast'
 import { formatCurrency } from '@/lib/utils'
 import { ACCOUNT_TYPES } from '@/types'
 import type { BudgetAccount, BudgetTransaction } from '@/types'
+import { PlaidConnectButton, PlaidSyncButton } from '@/pages/budget/PlaidConnectButton'
 
 const COLORS = ['#6366f1', '#22c55e', '#f59e0b', '#ef4444', '#3b82f6', '#8b5cf6', '#ec4899', '#14b8a6']
 
@@ -389,9 +390,12 @@ export function BudgetPage() {
           )}
         </TabsContent>
 
-        <TabsContent value="accounts" className="mt-4">
+        <TabsContent value="accounts" className="mt-4 space-y-4">
+          <div className="flex justify-end">
+            <PlaidConnectButton />
+          </div>
           {accounts.length === 0 ? (
-            <p className="text-center text-sm text-muted-foreground py-8">No accounts added yet.</p>
+            <p className="text-center text-sm text-muted-foreground py-8">No accounts added yet. Add one manually or connect via Plaid.</p>
           ) : (
             <div className="space-y-2">
               {accounts.map((a) => (
@@ -401,9 +405,14 @@ export function BudgetPage() {
                       <p className="font-medium">{a.name}</p>
                       <p className="text-sm capitalize text-muted-foreground">{a.type}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="flex items-center gap-3">
                       {a.balance != null && <p className="font-semibold">{formatCurrency(a.balance)}</p>}
-                      {a.plaid_item_id && <Badge variant="success" className="text-xs">Connected</Badge>}
+                      {a.plaid_item_id ? (
+                        <div className="flex items-center gap-2">
+                          <Badge variant="success" className="text-xs">Connected</Badge>
+                          <PlaidSyncButton account={a} />
+                        </div>
+                      ) : null}
                     </div>
                   </CardContent>
                 </Card>
