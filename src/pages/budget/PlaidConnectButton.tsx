@@ -15,9 +15,11 @@ async function callPlaid(token: string, action: string, payload: Record<string, 
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, ...payload }),
   })
-  const data = await res.json()
-  if (!res.ok) throw new Error(data.error ?? 'Plaid request failed')
-  return data
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
+    throw Object.assign(new Error(data.error ?? 'Plaid request failed'), { status: res.status })
+  }
+  return res.json()
 }
 
 export function PlaidConnectButton() {
@@ -33,7 +35,12 @@ export function PlaidConnectButton() {
       const data = await callPlaid(session.access_token, 'create_link_token')
       setLinkToken(data.link_token)
     } catch (err) {
-      toast({ title: 'Plaid unavailable', description: (err as Error).message, variant: 'destructive' })
+      const e = err as Error & { status?: number }
+      const description =
+        e.status === 404
+          ? 'Plaid Edge Function not deployed. Run: supabase functions deploy plaid'
+          : e.message
+      toast({ title: 'Plaid unavailable', description, variant: 'destructive' })
     } finally {
       setLoading(false)
     }
