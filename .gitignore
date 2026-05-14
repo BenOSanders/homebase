@@ -6,6 +6,12 @@ dist-ssr/
 .env.local
 *.local
 
+# Claude
+.claude
+
+# Supabase
+supabase/
+
 # TypeScript build cache
 *.tsbuildinfo
 
